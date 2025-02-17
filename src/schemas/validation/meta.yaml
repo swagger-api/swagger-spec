@@ -1,13 +1,13 @@
-$id: https://spec.openapis.org/oas/3.1/meta/WORK-IN-PROGRESS
+$id: https://spec.openapis.org/oas/3.2/meta/WORK-IN-PROGRESS
 $schema: https://json-schema.org/draft/2020-12/schema
 
 title: OAS Base Vocabulary
-description: A JSON Schema Vocabulary used in the OpenAPI Schema Dialect
+description: A JSON Schema Vocabulary used in the OpenAPI JSON Schema Dialect
 
 $dynamicAnchor: meta
 
 $vocabulary:
-  https://spec.openapis.org/oas/3.1/vocab/base: true
+  https://spec.openapis.org/oas/3.2/vocab/base: true
 
 type:
   - object

@@ -1,8 +1,8 @@
-$id: https://spec.openapis.org/oas/3.1/dialect/WORK-IN-PROGRESS
+$id: https://spec.openapis.org/oas/3.2/dialect/WORK-IN-PROGRESS
 $schema: https://json-schema.org/draft/2020-12/schema
 
-title: OpenAPI 3.1 Schema Object Dialect
-description: A JSON Schema dialect describing schemas found in OpenAPI v3.1 Descriptions
+title: OpenAPI 3.2 Schema Object Dialect
+description: A JSON Schema dialect describing schemas found in OpenAPI v3.2.x Descriptions
 
 $dynamicAnchor: meta
 
@@ -14,8 +14,8 @@ $vocabulary:
   https://json-schema.org/draft/2020-12/vocab/meta-data: true
   https://json-schema.org/draft/2020-12/vocab/unevaluated: true
   https://json-schema.org/draft/2020-12/vocab/validation: true
-  https://spec.openapis.org/oas/3.1/vocab/base: false
+  https://spec.openapis.org/oas/3.2/vocab/base: false
 
 allOf:
   - $ref: https://json-schema.org/draft/2020-12/schema
-  - $ref: https://spec.openapis.org/oas/3.1/meta/WORK-IN-PROGRESS
+  - $ref: https://spec.openapis.org/oas/3.2/meta/WORK-IN-PROGRESS
