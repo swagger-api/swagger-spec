@@ -4,14 +4,11 @@ name: schema-publish
 # issue: https://github.com/OAI/OpenAPI-Specification/issues/3715
 
 #
-# This workflow copies the 3.x schemas to the gh-pages branch
+# This stub workflow is needed to manually publish schema iterations from vX.Y-dev branches
 #
 
 # run this on push to main
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch: {}
 
 jobs:
@@ -20,38 +17,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4 # checkout main branch
-      with:
-        fetch-depth: 0
-
-    - uses: actions/setup-node@v4 # setup Node.js
-      with:
-        node-version: '20.x'
-
-    - name: Install dependencies
-      run: npm ci
-
-    - uses: actions/checkout@v4 # checkout gh-pages branch
-      with:
-        ref: gh-pages
-        path: deploy
-
-    - name: run main script
-      run: scripts/schema-publish.sh
-
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v6
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        branch: publish-schema-iteration
-        base: gh-pages
-        delete-branch: true
-        path: deploy
-        labels: Housekeeping,Schema
-        reviewers: darrelmiller,webron,earth2marsh,webron,lornajane,mikekistler,miqui,ralfhandl,handrews,karenetheridge
-        title: Publish OpenAPI Schema Iterations
-        commit-message: New OpenAPI schema iterations
-        signoff: true
-        body: |
-          This pull request is automatically triggered by GitHub action `schema-publish`.
-          The `schemas/**/*.yaml` files have changed and JSON files are automatically generated.
+    - name: dummy
+      run: echo Do nothing
