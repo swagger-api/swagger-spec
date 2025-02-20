@@ -17,13 +17,14 @@ fi
 publish_schema() {
   local schema="$1"
   local date="$2"
+  local sedCmd="$3"
 
   local base=$(basename $schema '.yaml')
   local target=$deploydir/$base/$date
 
   mkdir -p $deploydir/$base
-  # replace the WORK-IN-PROGRESS placeholder
-  sed -e "s/${base}\\/WORK-IN-PROGRESS/${base}\\/${date}/g" $schemaDir/$schema > $target.yaml
+  # replace the WORK-IN-PROGRESS placeholders
+  sed -e $sedCmd $schemaDir/$schema > $target.yaml
 
   node scripts/yaml2json/yaml2json.js "$target.yaml"
   rm "$target.yaml"
@@ -38,6 +39,7 @@ schemas=(meta.yaml dialect.yaml schema.yaml schema-base.yaml)
 
 # publish each schema using its or any of its dependencies newest commit date.
 maxDate=""
+sedCmds=()
 for schema in "${schemas[@]}"; do
   if [ -f  "$schemaDir/$schema" ]; then
     newestCommitDate=$(git log -1 --format="%ad" --date=short "$schemaDir/$schema")
@@ -47,7 +49,11 @@ for schema in "${schemas[@]}"; do
       maxDate=$newestCommitDate
     fi
 
-    publish_schema "$schema" "$maxDate"
+    base=$(basename $schema '.yaml')
+    # Add the replacement for this schema's placeholder to list of sed commands.
+    sedCmds+=("s/${base}\/WORK-IN-PROGRESS/${base}\/${maxDate}/g")
+
+    publish_schema "$schema" "$maxDate" $(printf '%s;' "${sedCmds[@]}")
   fi
 done
 
