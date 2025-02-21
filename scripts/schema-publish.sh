@@ -7,7 +7,7 @@
 schemaDir="src/schemas/validation"
 branch=$(git branch --show-current)
 
-if [[ $branch =~ ^v([0-9]+\.[0-9]+)\.[0-9]+ ]]; then
+if [[ $branch =~ ^v([0-9]+\.[0-9]+) ]]; then
   deploydir="./deploy/oas/${BASH_REMATCH[1]}"
 else
   deploydir="./deploy-preview"
