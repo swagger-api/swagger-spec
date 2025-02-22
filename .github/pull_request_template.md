@@ -13,3 +13,9 @@ present on the main branch, only on the development branches).
 
 Note that we do not accept changes to published specifications.
 -->
+
+Tick one of the following options:
+
+- [ ] schema changes are included in this pull request
+- [ ] schema changes are needed for this pull request but not done yet
+- [ ] no schema changes are needed for this pull request

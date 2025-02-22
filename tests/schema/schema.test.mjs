@@ -27,14 +27,15 @@ const parseYamlFromFile = (filePath) => {
 setMetaSchemaOutputFormat(BASIC);
 
 const validateOpenApi = await validate("./src/schemas/validation/schema.yaml");
+const fixtures = './tests/schema';
 
 describe("v3.1", () => {
   describe("Pass", () => {
-    readdirSync(`./tests/v3.1/pass`, { withFileTypes: true })
+    readdirSync(`${fixtures}/pass`, { withFileTypes: true })
       .filter((entry) => entry.isFile() && /\.yaml$/.test(entry.name))
       .forEach((entry) => {
         test(entry.name, () => {
-          const instance = parseYamlFromFile(`./tests/v3.1/pass/${entry.name}`);
+          const instance = parseYamlFromFile(`${fixtures}/pass/${entry.name}`);
           const output = validateOpenApi(instance, BASIC);
           expect(output.valid).to.equal(true);
         });
@@ -42,11 +43,11 @@ describe("v3.1", () => {
   });
 
   describe("Fail", () => {
-    readdirSync(`./tests/v3.1/fail`, { withFileTypes: true })
+    readdirSync(`${fixtures}/fail`, { withFileTypes: true })
       .filter((entry) => entry.isFile() && /\.yaml$/.test(entry.name))
       .forEach((entry) => {
         test(entry.name, () => {
-          const instance = parseYamlFromFile(`./tests/v3.1/fail/${entry.name}`);
+          const instance = parseYamlFromFile(`${fixtures}/fail/${entry.name}`);
           const output = validateOpenApi(instance, BASIC);
           expect(output.valid).to.equal(false);
         });

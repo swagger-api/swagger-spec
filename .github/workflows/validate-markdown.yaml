@@ -18,16 +18,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+  
     - uses: actions/checkout@v4 # checkout repo content
       with:
         fetch-depth: 0
-    - name: use the javascript environment from main
-      run: |
-        git checkout remotes/origin/main -- package.json package-lock.json .markdownlint.yaml
+
     - uses: actions/setup-node@v4 # setup Node.js
       with:
         node-version: '20.x'
+
     - name: Validate markdown
       run: npx --yes mdv versions/3.*.md src/oas.md
+
     - name: Lint markdown 3.0.4, 3.1.1, and later
       run: npx --yes markdownlint-cli --config .markdownlint.yaml versions/3.0.4.md versions/3.1.[^0].md versions/3.[2-9].*.md src/oas.md
