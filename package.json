@@ -14,7 +14,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "build": "bash ./scripts/md2html/build.sh",
-    "build-src": "npm run validate-markdown && bash ./scripts/md2html/build.sh src",
+    "build-src": "npm run validate-markdown && bash ./scripts/md2html/build.sh src && bash ./scripts/schema-publish.sh src",
     "test": "c8 --100 vitest --watch=false && bash scripts/schema-test-coverage.sh",
     "format-markdown": "bash ./scripts/format-markdown.sh ./src/oas.md",
     "validate-markdown": "npx mdv src/oas.md && npx markdownlint-cli src/oas.md"
