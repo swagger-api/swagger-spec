@@ -129,28 +129,13 @@ function preface(title,options) {
     preface += '<meta name="description" content="The OpenAPI Specification (OAS) defines a standard, programming language-agnostic interface description for HTTP APIs.">';
 
     // ReSpec
+    preface += '<meta name="color-scheme" content="light dark">';
     preface += '<script src="../js/respec-w3c.js" class="remove"></script>';
     preface += `<script class="remove">var respecConfig = ${JSON.stringify(respec)};</script>`;
-    try {
-        preface += fs.readFileSync('./analytics/google.html','utf8');
-    }
-    catch (ex) {}
+    preface += fs.readFileSync(path.resolve(__dirname,'./analytics/google.html'),'utf8');
     preface += '</head><body>';
     preface += '<style>';
-    preface += '#respec-ui { visibility: hidden; }';
-    preface += '#title { color: #578000; } #subtitle { color: #578000; }';
-    preface += '.dt-published { color: #578000; } .dt-published::before { content: "Published "; }';
-    preface += 'h1,h2,h3,h4,h5,h6 { color: #578000; font-weight: normal; font-style: normal; }';
-    preface += 'a[href] { color: #45512c; }';
-    preface += 'body:not(.toc-inline) #toc h2 { color: #45512c; }';
-    preface += 'table { display: block; width: 100%; overflow: auto; }';
-    preface += 'table th { font-weight: 600; }';
-    preface += 'table th, table td { padding: 6px 13px; border: 1px solid #dfe2e5; }';
-    preface += 'table tr { background-color: #fff; border-top: 1px solid #c6cbd1; }';
-    preface += 'table tr:nth-child(2n) { background-color: #f6f8fa; }';
-    preface += 'pre { background-color: #f6f8fa !important; }';
-    preface += 'code { color: #c83500 } th code { color: inherit }';
-    preface += 'a.bibref { text-decoration: underline;}';
+    preface += fs.readFileSync(path.resolve(__dirname,'main.css'),'utf8').split(/\r?\n/).join(' ');
     preface += fs.readFileSync(path.resolve(__dirname,'gist.css'),'utf8').split(/\r?\n/).join(' ');
     preface += '</style>';
     preface += `<h1 id="title">${title.split('|')[0]}</h1>`;
