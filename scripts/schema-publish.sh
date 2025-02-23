@@ -7,10 +7,19 @@
 schemaDir="src/schemas/validation"
 branch=$(git branch --show-current)
 
-if [[ $branch =~ ^v([0-9]+\.[0-9]+)-dev$ ]]; then
-  deploydir="./deploy/oas/${BASH_REMATCH[1]}"
-else
+
+if [ -z "$1" ]; then
+  if [[ $branch =~ ^v([0-9]+\.[0-9]+)-dev$ ]]; then
+    deploydir="./deploy/oas/${BASH_REMATCH[1]}"
+  else
+    echo "Unable to determine version from branch name; should be vMAJOR.MINOR.PATCH-dev"
+    exit 1
+  fi
+elif [ $1 = "src" ]; then
   deploydir="./deploy-preview"
+else
+  echo "Unrecognized argument"
+  exit 1
 fi
 
 # create the date-stamped schemas
